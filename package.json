@@ -1,0 +1,36 @@
+{
+  "name": "lys",
+  "version": "0.0.1",
+  "description": "A cross-platform interface for LIFX lights.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cydrobolt/lys.git"
+  },
+  "keywords": [
+    "lifx",
+    "iot",
+    "gui"
+  ],
+  "author": "GitHub",
+  "license": "Apache",
+  "bugs": {
+    "url": "https://github.com/cydrobolt/lys/issues"
+  },
+  "homepage": "https://github.com/cydrobolt/lys#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  },
+  "dependencies": {
+    "electron-settings": "^1.0.4",
+    "gulp": "^3.9.1",
+    "gulp-swig": "^0.8.0",
+    "request": "^2.69.0",
+    "rimraf": "^2.5.2",
+    "swig": "^1.4.2",
+    "ya-lifx": "^1.0.2"
+  }
+}

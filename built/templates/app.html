@@ -1,0 +1,91 @@
+<!--
+ #  Copyright 2016 Chaoyi Zha
+ #
+ #  Licensed under the Apache License, Version 2.0 (the "License");
+ #  you may not use this file except in compliance with the License.
+ #  You may obtain a copy of the License at
+ #
+ #      http://www.apache.org/licenses/LICENSE-2.0
+ #
+ #  Unless required by applicable law or agreed to in writing, software
+ #  distributed under the License is distributed on an "AS IS" BASIS,
+ #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ #  See the License for the specific language governing permissions and
+ #  limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lys</title>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../static/css/lys.css" rel="stylesheet">
+
+    
+<link href='../../static/css/spectrum.css' rel='stylesheet'>
+
+
+    <script onload="window.$ = window.jQuery = module.exports;" src="../../static/js/jquery.min.js"></script>
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="row">
+            <div class='col-md-3 ly-pad-top-nav'>
+                <ul class='nav nav-pills nav-stacked admin-nav ly-tab-ul' role='tablist'>
+
+                </ul>
+
+                <div class='ly-center'>
+                    <a href='#'><i class='fa fa-refresh fa-2x ly-refresh-icon'></i></a>
+                </div>
+
+                <div class='ly-no-lights'>
+                    <h2>No lights found</h2>
+                    <p><i class='fa fa-spinner fa-spin'></i> &nbsp; Searching...</p>
+                </div>
+            </div>
+            <div class='col-md-9'>
+                <div class="tab-content ly-tabs">
+                    <div role="tabpanel" class="tab-pane active" id="Lys_Home">
+                        <div class="ly-index-center-logo">
+                            <img class="ly-index-logo" src="../../static/lys.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../../static/js/bootstrap.min.js"></script>
+    
+    <script src="../../static/js/handlebars-v4.0.5.min.js"></script>
+    <script src="../../static/js/app-lys.js"></script>
+    <script src="../../static/js/underscore.min.js"></script>
+    <script src="../../static/js/backbone.min.js"></script>
+    <script src="../../static/js/surfacecurve-color.js"></script>
+    <script src="../../static/js/spectrum.js"></script>
+
+    
+    <hb id="ly-light-nav-template" type="text/x-handlebars-template">
+        <li role="presentation" class="{{extra_classes}}"><a aria-controls="{{tab_label}}" id="activate-{{tab_label}}" href="#{{tab_label}}" role="tab" data-toggle="tab">{{label}}</a></li>
+    </hb>
+
+    <hb id="ly-light-elem-template" type="text/x-handlebars-template">
+        <div role="tabpanel" class="tab-pane ly-dyn" data-indice="{{indice}}" id="{{tab_label}}">
+            <h3>{{label}}</h3>
+
+            <div class='c-wheel'></div>
+            {{ color.hue }}
+        </div>
+    </hb>
+    
+
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Lys{% endblock %}
+
+{% block css %}
+<link href='../../static/css/spectrum.css' rel='stylesheet'>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class='col-md-3 ly-pad-top-nav'>
+                <ul class='nav nav-pills nav-stacked admin-nav ly-tab-ul' role='tablist'>
+
+                </ul>
+
+                <div class='ly-center'>
+                    <a href='#'><i class='fa fa-refresh fa-2x ly-refresh-icon'></i></a>
+                </div>
+
+                <div class='ly-no-lights'>
+                    <h2>No lights found</h2>
+                    <p><i class='fa fa-spinner fa-spin'></i> &nbsp; Searching...</p>
+                </div>
+            </div>
+            <div class='col-md-9'>
+                <div class="tab-content ly-tabs">
+                    <div role="tabpanel" class="tab-pane active" id="Lys_Home">
+                        <div class="ly-index-center-logo">
+                            <img class="ly-index-logo" src="../../static/lys.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="../../static/js/handlebars-v4.0.5.min.js"></script>
+    <script src="../../static/js/app-lys.js"></script>
+    <script src="../../static/js/underscore.min.js"></script>
+    <script src="../../static/js/backbone.min.js"></script>
+    <script src="../../static/js/surfacecurve-color.js"></script>
+    <script src="../../static/js/spectrum.js"></script>
+
+    {% raw %}
+    <hb id="ly-light-nav-template" type="text/x-handlebars-template">
+        <li role="presentation" class="{{extra_classes}}"><a aria-controls="{{tab_label}}" id="activate-{{tab_label}}" href="#{{tab_label}}" role="tab" data-toggle="tab">{{label}}</a></li>
+    </hb>
+
+    <hb id="ly-light-elem-template" type="text/x-handlebars-template">
+        <div role="tabpanel" class="tab-pane ly-dyn" data-indice="{{indice}}" id="{{tab_label}}">
+            <h3>{{label}}</h3>
+
+            <div class='c-wheel'></div>
+            {{ color.hue }}
+s        </div>
+    </hb>
+    {% endraw %}
+
+{% endblock %}
