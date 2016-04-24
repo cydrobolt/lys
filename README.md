@@ -1,4 +1,5 @@
-# lys
+<img src=http://i.imgur.com/lqyC9tv.png' width="5em">
+
 Cross-platform interface for LIFX lights
 
 ```
