@@ -23,11 +23,11 @@ const ipcMain = require('electron').ipcMain;
 const lifx = require('ya-lifx');
 const request = require('request');
 const electron_settings = require('electron-settings');
-
+const lys_config = require('./config.js').LysConfig;
 const lifx_oauth = require('./lib/lifx-oauth/main.js').LifxOauth;
 
-const client_id = "";
-const client_secret = "";
+const client_id = lys_config.client_id;
+const client_secret = lys_config.client_secret;
 
 var lifx_profile;
 
