@@ -16,6 +16,7 @@
 
 const ipcRenderer = require('electron').ipcRenderer;
 const lifx = require('ya-lifx');
+window.tinycolor = require('tinycolor2');
 
 window.lights_global = false;
 var light_nav_item, light_elem_item;
@@ -116,7 +117,30 @@ $(function() {
             // Reactivate previously active tab
             $('#' + current_tab_id).tab('show');
         });
-
-
     });
+
+    // Color Changes
+    $('body').delegate('.ly-change-color', 'sliderup', function() {
+        var indice = $(this).data('ly-indice');
+        var color_hex = $(this).val();
+
+        console.log('trying to change');
+
+        lifx.setState({
+            'color': color_hex,
+            'power': 'on',
+            'brightness': '0.2'
+        })
+        .then(function (r) {
+            console.log(r);
+        })
+        .fail(function(e) {
+            console.log(e);
+        });
+    });
+
+    // Brightness Changes
+
+    // Light Toggle Changes
+
 });
