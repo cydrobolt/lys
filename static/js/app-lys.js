@@ -15,7 +15,11 @@
  */
 
 const ipcRenderer = require('electron').ipcRenderer;
-const lifx = require('lifx-http-api');
+const lifx_http_api = require('lifx-http-api');
+
+// Declare LIFX API instance
+var lifx = null;
+
 window.tinycolor = require('tinycolor2');
 
 window.lights_global = false;
@@ -100,8 +104,12 @@ $(function() {
     light_elem_item = Handlebars.compile(light_elem_item_hbs);
 
     // Request authentication token
-    window.token = ipcRenderer.sendSync('get_token', 'get_token');
-    lifx.init(token);
+    window.lifx_token = ipcRenderer.sendSync('get_token', 'get_token');
+
+    console.log(lifx_token);
+    lifx = new lifx_http_api({
+        bearerToken: lifx_token
+    });
 
     syncInterface();
 
@@ -123,12 +131,13 @@ $(function() {
     $('body').delegate('.ly-change-color', 'sliderup', function() {
         var indice = $(this).data('ly-indice');
         var color_hex = $(this).val();
+        var selector = "id:" + lights_global[indice].id;
 
         console.log('trying to change');
 
-        lifx.setState({
+        lifx.setState(selector, {
             'color': color_hex,
-            'brightness': '0.2'
+            'brightness': '1'
         })
         .then(function (r) {
             console.log(r);
