@@ -55,6 +55,11 @@
     width: 0;
 }
 
+.ly-toggle-power {
+    font-size: 100px;
+    cursor: pointer;
+}
+
 .container {
     margin-top: 2em;
 }

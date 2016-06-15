@@ -4,6 +4,7 @@
 
 {% block css %}
 <link href='../../static/css/wheelcolorpicker.css' rel='stylesheet'>
+<link href='../../static/css/bootstrap-slider.min.css' rel='stylesheet'>
 {% endblock %}
 
 {% block content %}
@@ -54,22 +55,43 @@
         <div role="tabpanel" class="tab-pane ly-dyn" data-indice="{{indice}}" id="{{tab_label}}">
             <h3>{{label}}</h3>
 
-            <div class='circle'></div>
-            <input type="text" class='ly-change-color' data-ly-indice='{{indice}}' id='color-wheel-{{indice}}' data-wcp-sliders='w' data-wheelcolorpicker="">
+            <div class='row'>
+                <div class='col-md-2'>
+                    <h4>Color</h4>
+                    <div class='circle'></div>
+                    <input type="text" class='ly-change-color' data-ly-indice='{{indice}}' id='color-wheel-{{indice}}' data-wcp-sliders='w' data-wheelcolorpicker="">
+                </div>
+                <div class='col-md-2'>
+                    <h4>Brightness</h4>
+                    <input data-ly-indice='{{indice}}' class='ly-change-brightness' id="brightness-selector-{{indice}}" type="text" />
+                </div>
+                <div class='col-md-2'>
+                    <h4>Power</h4>
+                    <i data-ly-indice='{{indice}}' class="fa fa-power-off ly-toggle-power" aria-hidden="true"></i>
+                </div>
+
+            </div>
 
             <script>
                 $(function () {
                     // Wrap in a function to scope variables
 
                     var color_wheel = $('#color-wheel-{{indice}}');
+                    var brightness_slider = $('#brightness-selector-{{indice}}');
+
                     var color_display_circle = color_wheel.prev();
                     var hex_string_initial = tinycolor("hsv({{color.hue}}, {{color.saturation}}, 100%)").toHexString();
 
                     color_wheel.wheelColorPicker();
+                    var brightness_slider_inst = new Slider("#brightness-selector-{{indice}}", {min  : 0, max  : 1, step: 0.01, reversed: true, value: lights_global[{{indice}}].brightness, orientation: 'vertical', tooltip_position:'left'});
 
                     color_display_circle.click(function () {
                         // Delegate click to hidden input selector
                         color_wheel.trigger('focus');
+                    });
+
+                    brightness_slider_inst.on("slideStop", function (sliderEvt) {
+                        brightness_slider.trigger('slide');
                     });
 
                     color_display_circle.css('background-color', hex_string_initial);
@@ -78,6 +100,7 @@
                         var hex_string = "#" + $('#color-wheel-{{indice}}').val();
                         color_display_circle.css('background-color', hex_string);
                     });
+
                 });
 
             </script>

@@ -21,6 +21,7 @@ const lifx_http_api = require('lifx-http-api');
 var lifx = null;
 
 window.tinycolor = require('tinycolor2');
+window.Slider = require('bootstrap-slider');
 
 window.lights_global = false;
 var light_nav_item, light_elem_item;
@@ -86,6 +87,10 @@ function syncInterface() {
     });
 }
 
+function getSelectorFromIndice(indice) {
+    return "id:" + lights_global[indice].id;
+}
+
 $(function() {
     // Hide refresh button
     $('.ly-refresh-icon').hide();
@@ -131,13 +136,10 @@ $(function() {
     $('body').delegate('.ly-change-color', 'sliderup', function() {
         var indice = $(this).data('ly-indice');
         var color_hex = $(this).val();
-        var selector = "id:" + lights_global[indice].id;
-
-        console.log('trying to change');
+        var selector = getSelectorFromIndice(indice);
 
         lifx.setState(selector, {
-            'color': color_hex,
-            'brightness': '1'
+            'color': color_hex
         })
         .then(function (r) {
             console.log(r);
@@ -149,6 +151,35 @@ $(function() {
 
     // Brightness Changes
 
+    $('body').delegate('.ly-change-brightness', 'slide', function() {
+        var indice = $(this).data('ly-indice');
+        var brightness = $(this).val();
+        var selector = getSelectorFromIndice(indice);
+
+        lifx.setState(selector, {
+            'brightness': brightness
+        })
+        .then(function (r) {
+            console.log(r);
+        })
+        .fail(function(e) {
+            console.log(e);
+        });
+    });
+
     // Light Toggle Changes
+
+    $('body').delegate('.ly-toggle-power', 'click', function() {
+        var indice = $(this).data('ly-indice');
+        var selector = getSelectorFromIndice(indice);
+
+        lifx.togglePower(selector, 1)
+        .then(function (r) {
+            console.log(r);
+        })
+        .fail(function(e) {
+            console.log(e);
+        });
+    });
 
 });

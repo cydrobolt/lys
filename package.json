@@ -25,6 +25,7 @@
     "electron-prebuilt": "^0.36.0"
   },
   "dependencies": {
+    "bootstrap-slider": "^7.1.0",
     "electron-settings": "^1.0.4",
     "gulp": "^3.9.1",
     "gulp-swig": "^0.8.0",
