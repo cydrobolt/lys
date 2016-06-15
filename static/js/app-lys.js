@@ -15,7 +15,7 @@
  */
 
 const ipcRenderer = require('electron').ipcRenderer;
-const lifx = require('ya-lifx');
+const lifx = require('lifx-http-api');
 window.tinycolor = require('tinycolor2');
 
 window.lights_global = false;
@@ -128,7 +128,6 @@ $(function() {
 
         lifx.setState({
             'color': color_hex,
-            'power': 'on',
             'brightness': '0.2'
         })
         .then(function (r) {

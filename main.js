@@ -20,16 +20,15 @@
 const electron = require('electron');
 const ipcMain = require('electron').ipcMain;
 
-const lifx = require('ya-lifx');
 const request = require('request');
 const electron_settings = require('electron-settings');
 const lys_config = require('./config.js').LysConfig;
-const lifx_oauth = require('./lib/lifx-oauth/main.js').LifxOauth;
+const Lifx_Oauth = require('./lib/lifx-oauth/main.js').LifxOauth;
 
 const client_id = lys_config.client_id;
 const client_secret = lys_config.client_secret;
 
-var lifx_profile;
+let lifx_profile = new Lifx_Oauth(client_id, client_secret);
 
 // Module to control application life.
 const app = electron.app;
@@ -51,8 +50,16 @@ function createWindow() {
         height: 600
     });
 
-    // and load the index of the app.
-    mainWindow.loadURL(getTemplate('auth'));
+    var user_token_cache = lifx_profile.getTokenFromCache();
+
+    if (user_token_cache) {
+        // Load app directly if token is cached
+        mainWindow.loadURL(getTemplate('app'));
+    }
+    else {
+        // Load the login prompt if no token is cached
+        mainWindow.loadURL(getTemplate('auth'));
+    }
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {
@@ -68,7 +75,6 @@ function createWindow() {
 app.on('ready', createWindow);
 
 ipcMain.on('authenticate', function(event, arg) {
-    lifx_profile = new lifx_oauth(client_id, client_secret);
     lifx_profile.authorize(function (token) {
         mainWindow.loadURL(getTemplate('app'));
     });
