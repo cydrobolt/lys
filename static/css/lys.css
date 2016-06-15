@@ -49,11 +49,26 @@
     margin-top: 1em;
 }
 
+.ly-change-color {
+    /* Hide selector input. Use circle instead. */
+    opacity: 0;
+    width: 0;
+}
+
 .container {
     margin-top: 2em;
 }
 
 hb {
-    /* hide handlebars templates */
+    /* Hide handlebars templates */
     display: none;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    background: red;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
 }

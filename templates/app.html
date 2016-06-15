@@ -54,16 +54,32 @@
         <div role="tabpanel" class="tab-pane ly-dyn" data-indice="{{indice}}" id="{{tab_label}}">
             <h3>{{label}}</h3>
 
+            <div class='circle'></div>
             <input type="text" class='ly-change-color' data-ly-indice='{{indice}}' id='color-wheel-{{indice}}' data-wcp-sliders='w' data-wheelcolorpicker="">
-            {{ color.hue }}
 
             <script>
-                $('#color-wheel-{{indice}}').wheelColorPicker();
-                console.log(tinycolor("hsv({{color.hue}}, {{color.saturation}}, 100%)").toHexString());
+                $(function () {
+                    // Wrap in a function to scope variables
 
-                $('#color-wheel-{{indice}}').on('sliderup', function() {
-        			console.log($('#color-wheel-{{indice}}').val());
-        		});
+                    var color_wheel = $('#color-wheel-{{indice}}');
+                    var color_display_circle = color_wheel.prev();
+                    var hex_string_initial = tinycolor("hsv({{color.hue}}, {{color.saturation}}, 100%)").toHexString();
+
+                    color_wheel.wheelColorPicker();
+
+                    color_display_circle.click(function () {
+                        // Delegate click to hidden input selector
+                        color_wheel.trigger('focus');
+                    });
+
+                    color_display_circle.css('background-color', hex_string_initial);
+
+                    $('#color-wheel-{{indice}}').on('sliderup', function() {
+                        var hex_string = "#" + $('#color-wheel-{{indice}}').val();
+                        color_display_circle.css('background-color', hex_string);
+                    });
+                });
+
             </script>
         </div>
 
