@@ -60,6 +60,41 @@
     cursor: pointer;
 }
 
+.ly-light-label {
+    display: inline;
+}
+
+.ly-light-disconnected-item {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.2;
+}
+
+.ly-light-disconnected-nav {
+    opacity: 0.5;
+}
+
+.ly-light-status-icon {
+    font-size: 3em;
+    padding-left: 1em;
+}
+
+.ly-status-icon-disconn {
+    color: red;
+}
+
+.ly-status-icon-conn {
+
+}
+
+.gh-btn {
+    color: black;
+}
+
+.gh-btn:hover {
+    color: #403e3e;
+}
+
 .container {
     margin-top: 2em;
 }
@@ -73,6 +108,8 @@ hb {
     width: 100px;
     height: 100px;
     background: red;
+
+    border: solid;
     -moz-border-radius: 50px;
     -webkit-border-radius: 50px;
     border-radius: 50px;

@@ -85,6 +85,10 @@ ipcMain.on('get_token', function(event, arg) {
     event.returnValue = lifx_profile.token;
 });
 
+ipcMain.on('open_link', function(event, arg) {
+    shell.openExternal(arg);
+});
+
 
 /* XXX Teardown Methods */
 

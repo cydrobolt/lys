@@ -15,6 +15,7 @@
  */
 
 const ipcRenderer = require('electron').ipcRenderer;
+const shell = require('electron').shell;
 const lifx_http_api = require('lifx-http-api');
 
 // Declare LIFX API instance
@@ -67,9 +68,11 @@ function syncInterface() {
                 ctx.tab_label = tab_label;
                 ctx.indice = i;
 
+                // Compile template for light nav
                 elem = light_nav_item(ctx);
                 markup_nav += elem;
 
+                // Compile template for light content node
                 elem = light_elem_item(ctx);
                 markup_tab += elem;
 
@@ -180,6 +183,13 @@ $(function() {
         .fail(function(e) {
             console.log(e);
         });
+    });
+
+    // Opening external link
+    $('a').click(function(e) {
+        var link_dest = $(this).attr('href');
+        shell.openExternal(link_dest);
+        e.preventDefault();
     });
 
 });
