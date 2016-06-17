@@ -58,7 +58,7 @@
 
     <script id="ly-light-elem-template" type="text/x-handlebars-template">
         <div role="tabpanel" class="tab-pane ly-dyn" data-indice="{{indice}}" id="{{tab_label}}">
-            <h3 class='ly-light-label'>{{label}}</h3> {{#if connected}}<i class='fa fa-check ly-status-icon ly-status-icon-conn'></i> <small>Bulb Online</small>{{else}}<i class='fa fa-times ly-light-status-icon ly-status-icon-disconn'></i> <small>Bulb Offline</small>{{/if}}
+            <h3 class='ly-light-label'>{{label}}</h3> {{#if connected}}<i class='fa fa-check ly-status-icon ly-status-icon-conn'></i> <span>Bulb Online</span>{{else}}<i class='fa fa-times ly-light-status-icon ly-status-icon-disconn'></i> <span>Bulb Offline</span>{{/if}}
 
             <div class='row {{#unless connected}}ly-light-disconnected-item{{/unless}}'>
                 <div class='col-sm-3'>
